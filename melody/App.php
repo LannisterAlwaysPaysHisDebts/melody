@@ -11,5 +11,6 @@ class App
     {
         require 'Load.php';
         $load = Load::autoloadRegister();
+        Register::getInstance()['Load'] = $load;
     }
 }

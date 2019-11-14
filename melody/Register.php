@@ -8,7 +8,7 @@ namespace Melody;
 
 class Register implements \ArrayAccess
 {
-    static $instance = null;
+    private static $instance = null;
 
     private $tree = [];
 
@@ -16,6 +16,9 @@ class Register implements \ArrayAccess
     {
     }
 
+    /**
+     * @return Register
+     */
     public static function getInstance()
     {
         if (self::$instance == null) {
