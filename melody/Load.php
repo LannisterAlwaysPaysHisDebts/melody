@@ -19,6 +19,7 @@ class Load
 
     /**
      * @param $class
+     * @return bool
      */
     protected static function _autoload($class)
     {
@@ -31,9 +32,8 @@ class Load
             _include($basePath);
         } elseif (file_exists($pathExt)) {
             _include($pathExt);
-        } else {
-            // todo: exception
         }
+        return false;
     }
 }
 
