@@ -17,18 +17,24 @@ class App
         // 自动加载
         require 'Load.php';
         $load = Load::autoloadRegister();
+
         Register::getInstance()['Load'] = $load;
+
+        // 配置加载
+        Register::getInstance()['Config'] = Config::getInstance();
+
+        // 加载助手函数
+        require "Helper.php";
 
         // 执行请求
         $route = Router::route();
         Register::getInstance()['Router'] = $route;
 
-        require "Helper.php";
-
         try {
             $result = $this->_run($route);
         } catch (AppException $e) {
             $e->notFound();
+            exit;
         }
 
         $this->_output($result);
