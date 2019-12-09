@@ -18,17 +18,18 @@ class App
         require 'Load.php';
         $load = Load::autoloadRegister();
 
-        Register::getInstance()['Load'] = $load;
+        $register = Register::getInstance();
+        $register['Load'] = $load;
 
         // 配置加载
-        Register::getInstance()['Config'] = Config::getInstance();
+        $register['Config'] = Config::getInstance();
 
         // 加载助手函数
         require "Helper.php";
 
         // 执行请求
         $route = Router::route();
-        Register::getInstance()['Router'] = $route;
+        $register['Router'] = $route;
 
         try {
             $result = $this->_run($route);
