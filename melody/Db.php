@@ -1,4 +1,8 @@
 <?php
+/**
+ * Db
+ */
+
 namespace Melody;
 
 class Db
@@ -6,6 +10,14 @@ class Db
     protected static $connection;
 
     protected static $config = [];
+
+    public static function get()
+    {
+        $config = Register::get("Config");
+        $dbSource = "Melody\\Db\\" . $config['source_name'];
+        $db = Register::get($dbSource, [$config['db_default']]);
+        return $db->connect();
+    }
 
     public static function init($config = [])
     {

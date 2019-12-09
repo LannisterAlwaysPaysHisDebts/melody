@@ -1,5 +1,6 @@
 <?php
 
 return [
-    "FrameworkName" => "Melody"
+    "framework_name"     =>      "Melody",
+    "source_name"        =>      "Mysql",
 ];

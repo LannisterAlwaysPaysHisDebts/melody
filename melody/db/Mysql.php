@@ -12,6 +12,16 @@ class Mysql extends Db
     private $passWd = null;
     private $option = null;
 
+    public function __construct($config)
+    {
+        $this->userName = $config["db_username"];
+        $this->passWd = $config["db_password"];
+        $this->dsn = "mysql:dbname={$config['db_name']};host={$config['db_host']}";
+    }
+
+    /**
+     * @return bool|PDO
+     */
     public function connect()
     {
         try{
