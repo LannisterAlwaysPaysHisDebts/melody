@@ -3,6 +3,7 @@
  * 助手函数列表
  */
 
+use Melody\Db;
 use Melody\Register;
 
 if (!function_exists("halt")) {
@@ -31,5 +32,15 @@ if (!function_exists("setLog")) {
         $log = Register::get("Melody\\Log");
         $log->setLog($content, $tag, $namespace, $logPath);
         return;
+    }
+}
+
+if (!function_exists("dbR")) {
+    /**
+     * @return PDO
+     */
+    function dbR()
+    {
+        return Db::get();
     }
 }

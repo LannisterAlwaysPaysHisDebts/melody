@@ -16,6 +16,7 @@ class Config implements ArrayAccess
 
         // 加载主要配置文件
         $this->load(MELODY . "/config/main.php");
+        $this->load(ROOT . "/app/config.php");
     }
 
     public function load($file)

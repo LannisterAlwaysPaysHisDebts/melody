@@ -6,7 +6,11 @@
 
 namespace Melody;
 
-class Register implements \ArrayAccess
+use ArrayAccess;
+use ReflectionClass;
+use ReflectionException;
+
+class Register implements ArrayAccess
 {
     private static $instance = null;
 
@@ -30,17 +34,18 @@ class Register implements \ArrayAccess
     /**
      * 获取对应类的实例
      * @param $className
+     * @param array $args
      * @return mixed
      */
-    public static function get($className)
+    public static function get($className, $args = [])
     {
         if (!self::getInstance()->offsetExists($className)) {
             try {
-                $reflect = new \ReflectionClass($className);
-            } catch (\ReflectionException $e) {
+                $reflect = new ReflectionClass($className);
+            } catch (ReflectionException $e) {
                 exit('ReflectException!');
             }
-            self::getInstance()->offsetSet($className, $reflect->newInstance());
+            self::getInstance()->offsetSet($className, $reflect->newInstanceArgs($args));
         }
         return self::getInstance()[$className];
     }
