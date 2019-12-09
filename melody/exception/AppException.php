@@ -5,12 +5,24 @@ use \Exception;
 
 class AppException extends Exception
 {
+    public function except()
+    {
+        switch ($this->getCode()) {
+            case 404:
+                $this->notFound();
+                break;
+            default:
+                $this->error();
+                break;
+        }
+    }
+
     /**
      * 错误页面
      */
     public function error()
     {
-        echo 'error';
+        echo debug_print_backtrace();
         exit;
     }
 

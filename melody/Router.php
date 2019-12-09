@@ -65,6 +65,7 @@ class Router
         $class = "";
         do {
             $item = array_shift($r);
+            if (empty($item)) continue;
             $class = empty($class) ? $item : "{$class}\\{$item}";
             if (class_exists($class)) {
                 $f = 1;
