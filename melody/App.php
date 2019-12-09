@@ -33,7 +33,7 @@ class App
         try {
             $result = $this->_run($route);
         } catch (AppException $e) {
-            $e->notFound();
+            $e->except();
             exit;
         }
 
