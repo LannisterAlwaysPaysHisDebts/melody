@@ -12,4 +12,22 @@ class Index
     {
         return ['Code' => 200];
     }
+
+    /**
+     * @return array
+     * @api http://notes.com/melody/?r=/app/api/getArticle
+     */
+    public function getArticle()
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     * @api http://notes.com/melody/?r=/app/api/getArticleList
+     */
+    public function getArticleList()
+    {
+        return [];
+    }
 }
