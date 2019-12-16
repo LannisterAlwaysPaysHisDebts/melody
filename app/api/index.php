@@ -1,10 +1,14 @@
 <?php
+/**
+ * Viewer接口
+ */
 
 namespace App\Api;
 
 class Index
 {
     /**
+     * Index
      * @return array
      * http://notes.com/melody/?r=/app/api/index
      */
@@ -14,6 +18,7 @@ class Index
     }
 
     /**
+     * 获取文章详情
      * @return array
      * @api http://notes.com/melody/?r=/app/api/index/getArticle
      */
@@ -42,6 +47,7 @@ class Index
     }
 
     /**
+     * 获取文章列表
      * @return array
      * @api http://notes.com/melody/?r=/app/api/index/getArticleList
      */
