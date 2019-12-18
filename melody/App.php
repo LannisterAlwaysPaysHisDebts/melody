@@ -27,6 +27,8 @@ class App
         // 加载助手函数
         require "Helper.php";
 
+        Session::start();
+
         // 执行请求
         $route = Router::route();
         $register['Router'] = $route;
