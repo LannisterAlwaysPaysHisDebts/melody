@@ -6,6 +6,7 @@
 namespace App\Api;
 
 use model\Account;
+use model\Article;
 
 class User
 {
@@ -52,7 +53,13 @@ class User
      */
     public function articleDesc()
     {
+        $id = $_POST['Id'];
+        if ($id <= 0) return ['Code' => 404];
 
+        $result = (new Article())->get($id);
+        if ($result === false) return ['Code' => 404];
+
+        return ['Code' => 0, "Msg" => '', "Data" => ['Article' => $result]];
     }
 
     /**
