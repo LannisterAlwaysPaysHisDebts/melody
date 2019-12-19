@@ -54,13 +54,7 @@ class Index
         $offset = (int)$_POST['Offset'];
         $limit = (int)$_POST['Limit'];
 
-        $offset = $offset < 0 ? 0 : $offset;
-        $limit = $limit <= 0 ? 10 : $limit;
-
-        $sql = "SELECT Id,Title,UpdateTime FROM Article LIMIT {$limit} OFFSET {$offset}";
-        $query = dbR()->prepare($sql);
-        $query->execute();
-        $result = $query->fetchAll();
+        $result = (new Article())->getList($offset, $limit);
         if (empty($result)) {
             return ['Code' => 404, 'Msg' => '当前没有文章', 'Data' => []];
         }
