@@ -5,7 +5,7 @@
 
 namespace App\Api;
 
-use Melody\Register;
+use model\Account;
 
 class User
 {
@@ -18,29 +18,56 @@ class User
         return ['Code' => 0, "SERVER" => $_SERVER, "HEADER" => $http_response_header];
     }
 
+    /**
+     * 登陆
+     * @return array
+     */
     public function login()
     {
         if (empty($_POST['PassWd']) || empty($_POST['Account'])) {
             return ['Code' => 1,'Msg' => '账号密码不能为空'];
         }
-        if ($_POST['Account'] != Register::get("Config")['user_account']) {
-            return ['Code' => 1, "Msg" => '密码错误'];
+        if (!Account::login($_POST['Account'], $_POST['PassWd'])) {
+            return ['Code' => 1, "Msg" => '账号或密码错误'];
         }
-        if ($_POST['PassWd'] != Register::get("Config")['user_passWd']) {
-            return ['Code' => 1, "Msg" => '密码错误'];
-        }
-
-        $_SESSION["Hash"] = Register::get("Config")['login_hash'];
 
         return ['Code' => 0, "Msg" => "登录成功"];
     }
 
+    /**
+     * 文章列表
+     * @return array
+     */
     public function articleList()
     {
-        if ($_SESSION['Hash'] != Register::get("Config")['login_hash']) {
+        if (!Account::checkLogin()) {
             return ['Code' => 201, 'Msg' => '请先登录'];
         }
 
         return ['Code' => 0, 'Msg' => '', 'Data' => ['List' => []]];
+    }
+
+    /**
+     * 文章详情
+     */
+    public function articleDesc()
+    {
+
+    }
+
+    /**
+     * 获取当前的todoList
+     */
+    public function todoList()
+    {
+
+    }
+
+    /**
+     * 编辑挡墙的todo
+     */
+    public function todoEdit()
+    {
+
     }
 }

@@ -10,7 +10,8 @@ class Load
     // 允许访问的根命名空间
     const ACCESS_BASE_NAMESPACE = [
         "melody",
-        "app"
+        "app",
+        "model"
     ];
 
     public static function autoloadRegister()

@@ -5,6 +5,8 @@
 
 namespace App\Api;
 
+use model\Article;
+
 class Index
 {
     /**
@@ -29,11 +31,7 @@ class Index
             return ['Code' => 1, 'Msg' => 'Error', 'Data' => []];
         }
 
-        $sql = "SELECT * FROM Article WHERE Id = {$id}";
-
-        $query = dbR()->prepare($sql);
-        $query->execute();
-        $data = $query->fetch();
+        $data = (new Article())->get($id);
         if ($data === false) {
             return ['Code' => 404, 'Msg' => '没有找到对应的文章', 'Data' => []];
         }
