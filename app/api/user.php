@@ -7,6 +7,7 @@ namespace App\Api;
 
 use model\Account;
 use model\Article;
+use model\Todo;
 
 class User
 {
@@ -67,7 +68,7 @@ class User
      */
     public function todoList()
     {
-
+        return ['Code' => 0, 'Msg' => '', 'Data' => (new Todo())->getList()];
     }
 
     /**
@@ -75,6 +76,10 @@ class User
      */
     public function todoEdit()
     {
-
+        $id = $_POST['Id'];
+        $data = $_POST['Data'];
+        $result = (new Todo())->edit($id, $data);
+        if ($result === false) return ['Code' => 404];
+        return ['Code' => 0, 'Msg' => '编辑成功'];
     }
 }

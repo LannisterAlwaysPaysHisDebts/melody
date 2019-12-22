@@ -16,4 +16,14 @@ abstract class ObjectMapping
         $query->execute();
         return $query->fetch();
     }
+
+    /**
+     * @param $id
+     * @param $data
+     * @return bool
+     */
+    public function edit($id, $data)
+    {
+        return false;
+    }
 }
