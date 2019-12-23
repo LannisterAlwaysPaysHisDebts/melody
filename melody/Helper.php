@@ -44,3 +44,11 @@ if (!function_exists("dbR")) {
         return Db::get();
     }
 }
+
+if (!function_exists("_params")) {
+    function _params()
+    {
+        if (PHP_SAPI != 'cli') return [];
+        return Register::get('Router')->getParams();
+    }
+}

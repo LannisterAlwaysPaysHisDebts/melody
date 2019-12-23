@@ -33,7 +33,7 @@ class Register implements ArrayAccess
 
     /**
      * 获取对应类的实例
-     * @param $className
+     * @param string $className
      * @param array $args
      * @return mixed
      */

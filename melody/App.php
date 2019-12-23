@@ -30,11 +30,9 @@ class App
         Session::start();
 
         // 执行请求
-        $route = Router::route();
-        $register['Router'] = $route;
-
+        $register['Router'] = Router::route();
         try {
-            $result = $this->_run($route);
+            $result = $this->_run($register['Router']);
         } catch (AppException $e) {
             $e->except();
             exit;

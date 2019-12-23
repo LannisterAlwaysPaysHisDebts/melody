@@ -13,6 +13,7 @@ class Config implements ArrayAccess
     {
         define("ROOT", realpath('.'));
         define("MELODY", realpath("./melody/"));
+        define("APP", realpath('./app/'));
 
         // 加载主要配置文件
         $this->load(MELODY . "/config/main.php");
