@@ -53,8 +53,8 @@ class CliRouter
             unset($params[0]);
 
         } elseif (isset($configOrderList[$params[0]])) {
-            $class = self::CLI_ORDER_LIST[$params[0]]['class'];
-            $method = self::CLI_ORDER_LIST[$params[0]]['method'];
+            $class = $configOrderList[$params[0]]['class'];
+            $method = $configOrderList[$params[0]]['method'];
             unset($params[0]);
 
         } else {
