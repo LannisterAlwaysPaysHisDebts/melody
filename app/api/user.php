@@ -62,24 +62,4 @@ class User
 
         return ['Code' => 0, "Msg" => '', "Data" => ['Article' => $result]];
     }
-
-    /**
-     * 获取当前的todoList
-     */
-    public function todoList()
-    {
-        return ['Code' => 0, 'Msg' => '', 'Data' => (new Todo())->getList()];
-    }
-
-    /**
-     * 编辑挡墙的todo
-     */
-    public function todoEdit()
-    {
-        $id = $_POST['Id'];
-        $data = $_POST['Data'];
-        $result = (new Todo())->edit($id, $data);
-        if ($result === false) return ['Code' => 404];
-        return ['Code' => 0, 'Msg' => '编辑成功'];
-    }
 }
