@@ -35,7 +35,7 @@ class Register implements ArrayAccess
      * 获取对应类的实例
      * @param string $className
      * @param array $args
-     * @return mixed
+     * @return object
      */
     public static function get($className, $args = [])
     {

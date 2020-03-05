@@ -17,7 +17,6 @@ class Config implements ArrayAccess
 
         // 加载主要配置文件
         $this->load(MELODY . "/config/main.php");
-        $this->load(ROOT . "/app/config.php");
     }
 
     public function load($file)
@@ -31,6 +30,13 @@ class Config implements ArrayAccess
         }
 
         $this->config = array_merge($this->config, $data);
+        return true;
+    }
+
+    public function loadConfig($config)
+    {
+        if (!is_array($config)) return false;
+        $this->config = array_merge($this->config, $config);
         return true;
     }
 

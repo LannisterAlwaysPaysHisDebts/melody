@@ -12,7 +12,7 @@ class App
     // 数据输出格式
     protected $outputMode;
 
-    public function run()
+    public function run($configFile = "")
     {
         // 自动加载
         require 'Load.php';
@@ -32,7 +32,7 @@ class App
         // 初始化路由
         $register['Router'] = Router::route();
 
-        $this->_loadApp();
+        $this->_loadApp($configFile);
 
         // 执行请求
         try {
@@ -47,10 +47,14 @@ class App
 
     /**
      * 加载框架外的配置
+     * @param $configFile
      */
-    protected function _loadApp()
+    protected function _loadApp($configFile)
     {
-
+        if (empty($configFile) || !file_exists($configFile)) {
+            return;
+        }
+        require $configFile;
     }
 
     /**

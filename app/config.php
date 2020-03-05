@@ -1,5 +1,8 @@
 <?php
-return [
+
+use Melody\Register;
+
+Register::get("Config")->loadConfig([
     // 使用的数据库模块, 目前只支持Mysql
     "source_name"       =>              "Mysql",
 
@@ -15,4 +18,4 @@ return [
     "user_account"      =>              "caoting",
     "user_passWd"       =>              "94525",
     "login_hash"        =>              "6e5a17b2b461ae7f8a2b6a13ac321597",
-];
+]);
