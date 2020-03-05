@@ -29,8 +29,12 @@ class App
 
         Session::start();
 
-        // 执行请求
+        // 初始化路由
         $register['Router'] = Router::route();
+
+        $this->_loadApp();
+
+        // 执行请求
         try {
             $result = $this->_run($register['Router']);
         } catch (AppException $e) {
@@ -42,12 +46,21 @@ class App
     }
 
     /**
+     * 加载框架外的配置
+     */
+    protected function _loadApp()
+    {
+
+    }
+
+    /**
      * @param Router $route
      * @return mixed
      * @throws AppException
      */
     protected function _run(Router $route)
     {
+        $route->parse();
         $class = $route->getClass();
         if (!class_exists($class)) {
             throw new AppException('Class not found', 404);

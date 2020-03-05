@@ -52,3 +52,10 @@ if (!function_exists("_params")) {
         return Register::get('Router')->getParams();
     }
 }
+
+if (!function_exists("route")) {
+    function route($queryString, $realPath, $methodLimit = 'get')
+    {
+        return Register::get('Router')->registerRoute($queryString, $realPath, $methodLimit);
+    }
+}

@@ -6,6 +6,8 @@
 namespace Melody;
 
 
+use Melody\Route\RouteConfig;
+
 class Router
 {
     private $requestMethod;
@@ -16,6 +18,8 @@ class Router
     protected $method = 'index';
     protected $params = '';
 
+    protected $routeConfig = [];
+
     protected function __construct()
     {
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -23,20 +27,29 @@ class Router
         $this->parse();
     }
 
-    // 加载路由文件
-    public function load($file = '')
+    /**
+     * 注册一条路由
+     * @param string $query : 请求
+     * @param string $realPath : 映射路径
+     * @param string $method : 请求方式 get/post
+     */
+    public function registerRoute($query, $realPath, $method)
     {
+        $this->routeConfig[] = new RouteConfig($query, $realPath, $method);
     }
 
-    // 路由解析
-    protected function parse()
+    /**
+     * 路由解析函数注册
+     */
+    public function parse()
     {
         if (empty($this->query)) {
             return;
         }
 
         $parseList = [
-            'defaultParse'
+            'configParse',
+            'defaultParse',
         ];
         foreach ($parseList as $function) {
             if (method_exists($this, $function)) {
@@ -47,12 +60,10 @@ class Router
         }
     }
 
-    public static function route()
-    {
-        $router = new self();
-        return $router;
-    }
-
+    /**
+     * 解析默认路由
+     * @return bool
+     */
     protected function defaultParse()
     {
         if (empty($this->query['r'])) {
@@ -71,7 +82,7 @@ class Router
                 $f = 1;
                 break;
             }
-        } while(!empty($r));
+        } while (!empty($r));
         if ($f == 1) {
             $this->class = $class;
             $this->method = 'index';
@@ -84,6 +95,33 @@ class Router
             return true;
         }
         return false;
+    }
+
+    /**
+     * 通过路由配置解析请求
+     * @return bool
+     */
+    protected function configParse()
+    {
+        if (empty($this->routeConfig)) {
+            return false;
+        }
+
+        foreach ($this->routeConfig as $routeConfig) {
+            if ($routeConfig instanceof RouteConfig && $routeConfig->getReal($this)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return Router
+     */
+    public static function route()
+    {
+        $router = new self();
+        return $router;
     }
 
     /**
